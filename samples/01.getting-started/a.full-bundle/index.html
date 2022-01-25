@@ -26,6 +26,8 @@
   </head>
   <body>
     <div id="webchat" role="main"></div>
+    <script src="card.js"></script>
+    <script src="middleware.js"></script>
     <script>
       (async function () {
         // In this demo, we are using Direct Line token from MockBot.
@@ -35,9 +37,11 @@
 
         const res = await fetch('https://webchat-mockbot.azurewebsites.net/directline/token', { method: 'POST' });
         const { token } = await res.json();
-
+        // const token =
+        //   'ew0KICAiYWxnIjogIlJTMjU2IiwNCiAgImtpZCI6ICJlTG1Ja0JEQXdMZHF1cG5EZGVhenJab3RZMzAiLA0KICAieDV0IjogImVMbUlrQkRBd0xkcXVwbkRkZWF6clpvdFkzMCIsDQogICJ0eXAiOiAiSldUIg0KfQ.ew0KICAiYm90IjogIndlYmNoYXQtbW9ja2JvdCIsDQogICJzaXRlIjogIldZREl5S3dBWkN3IiwNCiAgImNvbnYiOiAiOU5sYUtXSEpkSXdBZk1ZVHVqUk5uUi11cyIsDQogICJ1c2VyIjogImRsXzU3YTI2OWRjYWNjNzdmYjBiOWY3NDcwMmQ4NGYyNDAwIiwNCiAgIm9yaWdpbiI6IFsNCiAgICAiaHR0cHM6Ly93ZWJjaGF0LXBsYXlncm91bmQuYXp1cmV3ZWJzaXRlcy5uZXQiLA0KICAgICJodHRwOi8vbG9jYWxob3N0OjMwMDAiLA0KICAgICJodHRwczovL21pY3Jvc29mdC5naXRodWIuaW8iLA0KICAgICJodHRwczovL2NvbXB1bGltLmdpdGh1Yi5pbyIsDQogICAgImh0dHBzOi8vYmZ4d2ViY2hhdGZ1bGxidW5kbGUuYXp1cmV3ZWJzaXRlcy5uZXQiLA0KICAgICJodHRwOi8vbG9jYWxob3N0OjUwODAiDQogIF0sDQogICJuYmYiOiAxNjQzMTE4MTEyLA0KICAiZXhwIjogMTY0MzEyMTcxMiwNCiAgImlzcyI6ICJodHRwczovL2RpcmVjdGxpbmUuYm90ZnJhbWV3b3JrLmNvbS8iLA0KICAiYXVkIjogImh0dHBzOi8vZGlyZWN0bGluZS5ib3RmcmFtZXdvcmsuY29tLyINCn0.XGIjDqGP03z8LAnHpXxvwACFqC8e36AkBp9LA6WAcyRveK7zkBJELxcEd-Wjas1ghN9u2KhYBg-C5aUpc09Df4qDjQvd-X3T_ALOV-AFtQfzMTlg_cRY8L-ZRMbJkqZYhqqhvRtj3gDAzygs4oFTt0AVHfSlawqU0m5ZuOjgqzBMHFOMivSkeArLiOfUB1P0NzJHXXA-fvRu1OxPh_06NADzSkSNYgvjLB5q00GutnWj99EZCk_OE7VFnw0CC5YyulDbXdhtPsT8W26ZCRFSrjFkZknHy9ji8L1j45zFVU_O2fsuTNW5WAJ5KYMjSqZZ54SIkXQCYhSvDQhy0ns_Dg';
         window.WebChat.renderWebChat(
           {
+            store: createStore({}, storeMiddleware),
             directLine: window.WebChat.createDirectLine({ token })
           },
           document.getElementById('webchat')
